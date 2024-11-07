@@ -1,23 +1,36 @@
-import { View, Text } from 'react-native'
-import React, { FC } from 'react'
-import {createNativeStackNavigator} from "@react-navigation/native-stack"
+import { View, Text } from 'react-native';
+import React, { FC } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from '../feature/auth/SplashScreen';
 import { navigationRef } from '../utils/NavigationUtils';
-
-
+import CustomerLogin from '../feature/auth/CustomerLogin';
+import DeliveryLogin from '../feature/auth/DeliveryLogin';
 
 const Stack = createNativeStackNavigator();
 
-const Navigation:FC = () => {
-
+const Navigation: FC = () => {
   return (
-    <NavigationContainer ref = {navigationRef}>
-      <Stack.Navigator initialRouteName='SplashScreen' screenOptions={{headerShown : false}}>
-        <Stack.Screen name='SpashScreen' component={SplashScreen}></Stack.Screen>
+   
+      <Stack.Navigator initialRouteName="SplashScreen" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen
+          name="CustomerLogin"
+          component={CustomerLogin}
+          options={{
+            animation: 'fade',
+          }}
+        />
+        <Stack.Screen
+          name="DeliveryLogin"
+          component={DeliveryLogin}
+          options={{
+            animation: 'fade',
+          }}
+        />
       </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
 
-export default Navigation
+  );
+};
+
+export default Navigation;

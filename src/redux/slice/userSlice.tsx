@@ -19,9 +19,9 @@ const initialState: UserState = {
 
 const userSlice = createSlice({
     name: 'user',
-    initialState,  // TypeScript now knows the structure of state
+    initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<{ user: any; accessToken: string; refreshToken: string }>) => {
+        setUser: (state, action) => {
             state.user = action.payload.user;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;

@@ -1675,6 +1675,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@homielab/react-native-auto-scroll@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@homielab/react-native-auto-scroll@npm:0.0.10"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 1647ec7981f74dfda55eb61281dd47c282dbaa89c0ac5804f2192d2cf33028a52aff1e7342174de0cec09922cd7b85ce0ca6f6b3153e460df73b7f72e504f7d7
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -3324,6 +3334,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-vector-icons@npm:^6.4.18":
+  version: 6.4.18
+  resolution: "@types/react-native-vector-icons@npm:6.4.18"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-native": ^0.70
+  checksum: 1ef458cb5e7a37f41eb400e3153940b1b152e4df76a7c06c7a47c712dbfe46e14b9999f04dde1bd074f338f850e161c6c925174ddea33386b74f8112c940065b
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:^0.70":
+  version: 0.70.19
+  resolution: "@types/react-native@npm:0.70.19"
+  dependencies:
+    "@types/react": "*"
+  checksum: 79b504fa56340631079e7c20ea0d9412ec14147b76d0ce189f4403936f529ef1e6fd031383afab117846c5ae039123bcf3afc948bae4432269c6780282726f71
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.73.0":
   version: 0.73.0
   resolution: "@types/react-native@npm:0.73.0"
@@ -4104,6 +4133,7 @@ __metadata:
     "@babel/plugin-transform-private-methods": ^7.25.9
     "@babel/preset-env": ^7.25.3
     "@babel/runtime": ^7.25.0
+    "@homielab/react-native-auto-scroll": ^0.0.10
     "@react-native-async-storage/async-storage": ^2.0.0
     "@react-native-community/cli": 15.0.0-alpha.2
     "@react-native-community/cli-platform-android": 15.0.0-alpha.2
@@ -4118,6 +4148,7 @@ __metadata:
     "@reduxjs/toolkit": ^2.3.0
     "@types/react": ^18.3.12
     "@types/react-native": ^0.73.0
+    "@types/react-native-vector-icons": ^6.4.18
     "@types/react-test-renderer": ^18.0.0
     axios: ^1.7.7
     babel-jest: ^29.6.3

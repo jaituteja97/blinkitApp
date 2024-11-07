@@ -17,15 +17,15 @@ export async function replace(routeName: string, params?: object) {
     }
 }
 
+
 export async function resetAndNavigate(routeName: string) {
-    navigationRef.isReady();
     if (navigationRef.isReady()) {
-        navigationRef.dispatch(CommonActions.reset(
-            {
+        navigationRef.dispatch(
+            CommonActions.reset({
                 index: 0,
                 routes: [{ name: routeName }]
-            }
-        ))
+            })
+        );
     }
 }
 
