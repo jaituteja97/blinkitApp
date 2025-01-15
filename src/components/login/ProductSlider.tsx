@@ -12,7 +12,7 @@ const ProductSlider = React.memo(() => {
             result.push(imageData.slice(i, i + 4));
         }
         return result;
-    }, []);
+    }, [imageData]);
 
     return (
         <View pointerEvents='none'>
@@ -38,7 +38,7 @@ interface MemorizeRow {
 
 const MemorizeRow: FC<MemorizeRow> = ({ rowIndex, row }) => {
     return (
-        <View style={styles.row} key={rowIndex}>{row.map((imageSource: ImageSourcePropType | undefined, imageIndex: React.Key | null | undefined) => {
+        <View style={styles.row} key={rowIndex}>{row.map((imageSource : any,imageIndex : any) => {
             const horizontalShift = rowIndex % 2 == 0 ? -18 : 18
             return (
                 <View key={imageIndex} style={[styles.itemContainer, { transform: [{ translateX: horizontalShift }] }]}>
@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
     autoScroll:
     {
         position: "absolute",
-        zIndex: -1
+        zIndex: -2
     },
 
     row: {
         flexDirection: 'row',
-        marginVertical: 5,
+        marginVertical: 10,
     },
     image: {
         width: "100%",
@@ -73,14 +73,13 @@ const styles = StyleSheet.create({
     },
     itemContainer:
     {
-        marginBottom: 12,
         marginHorizontal: 10,
-        backgroundColor: "#e9f7f8",
-        height: screenWidth * 0.26,
-        width: screenWidth * 0.26,
+        height: screenWidth * 0.23,
+        width: screenWidth * 0.23,
         justifyContent: 'center',
         alignItems: "center",
         borderRadius: 25,
+        backgroundColor : "#ececec",
     }
 });
 

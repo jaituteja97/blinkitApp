@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 import { StyleSheet, TextInput, TextInputProps, TouchableOpacity, View } from "react-native";
 import { Colors, Fonts } from "../../utils/Constants";
 import { RFValue } from "react-native-responsive-fontsize";
-import Icon from 'react-native-vector-icons/dist/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface InputProps extends TextInputProps {
     left?: ReactNode;
@@ -19,11 +19,11 @@ const CustomInput: FC<InputProps> = ({ onClear, left, right = true, style, ...pr
                 style={[styles.inputContainer, style]}
                 placeholderTextColor="#ccc"
             />
-            { (right && props?.value?.length ||0 >0) && (
+            {right && props?.value?.length ? (
                 <TouchableOpacity onPress={onClear} style={styles.icon}>
-                    <Icon name="close-circle-sharp" size={RFValue(18)} color="#ccc" />
+                    <Ionicons name="close-circle-sharp" size={RFValue(18)} color="#ccc" />
                 </TouchableOpacity>
-            )}
+            ) : null}
         </View>
     );
 };
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingRight: 10,
     },
-   
 });
 
 export default CustomInput;

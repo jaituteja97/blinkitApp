@@ -4163,6 +4163,7 @@ __metadata:
     react-native-gesture-handler: ^2.20.2
     react-native-linear-gradient: ^2.8.3
     react-native-pager-view: ^6.4.1
+    react-native-permissions: ^5.2.2
     react-native-reanimated: ^3.16.1
     react-native-responsive-fontsize: ^0.5.1
     react-native-safe-area-context: ^4.12.0
@@ -9309,6 +9310,20 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 558f08efccf748eed91a2a88be4f90e49e2b63a28c1b9db5de9711eb324a75e9565a3dbf92c523a623a2c7d5a7e0d8a0db88599bc85d33158544a7d0e724319e
+  languageName: node
+  linkType: hard
+
+"react-native-permissions@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "react-native-permissions@npm:5.2.2"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 9f8a853b894c97b3384713e60d68440c559a61a29c4cefcada9886220a4c81a9730f37820fbeff1dc5e6a73921a5fbf8a5185e468426385f27fce41e67c782a5
   languageName: node
   linkType: hard
 

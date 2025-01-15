@@ -1,21 +1,37 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { GestureHandlerRootView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import CustomSafeAreaView from '../../components/global/CustomSafeAreaView'
 import ProductSlider from '../../components/login/ProductSlider'
 import { imageData } from '../../utils/dummyData'
-import Animated from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { resetAndNavigate } from '../../utils/NavigationUtils'
 import CustomText from '../../components/ui/CustomText'
 import { Fonts } from '../../utils/Constants'
 import CustomInput from '../../components/ui/CustomInput'
 import CustomButton from '../../components/ui/CustomButton'
+import useKeyboardOffsetHeight from '../../utils/keyboardoffsetHeight'
 
 const CustomerLogin: FC = () => {
 
   const [gestureSequence, setGestureSequence] = useState<string[]>([]);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const keyboardOffsetHeight = useKeyboardOffsetHeight();
+  const animatedValue = useSharedValue(0);
 
+  
+  useEffect(() => {
+    if (keyboardOffsetHeight > 0) {
+      animatedValue.value = withTiming(keyboardOffsetHeight * -0.8, {
+        duration: 300,
+      });
+    } else {
+      animatedValue.value = withTiming(0, {
+        duration: 300,
+      });
+    }
+  }, [keyboardOffsetHeight]);
+  
   const handleGesture = ({ nativeEvent }: any) => {
     if (nativeEvent.state === State.END) {
       const { translationX, translationY } = nativeEvent;
@@ -39,8 +55,9 @@ const CustomerLogin: FC = () => {
   };
 
   const handleAuth = async () => {
-    
+
   }
+
 
   return (
     <GestureHandlerRootView style={style.container}>
@@ -48,17 +65,17 @@ const CustomerLogin: FC = () => {
         <CustomSafeAreaView>
           <ProductSlider></ProductSlider>
           <PanGestureHandler onHandlerStateChange={handleGesture}>
-            <Animated.ScrollView bounces={false} keyboardDismissMode={'on-drag'} keyboardShouldPersistTaps={'handled'} contentContainerStyle={style.subContainer}>
+            <Animated.ScrollView style={{transform : [{translateY : animatedValue}]}} bounces={false} keyboardDismissMode={'on-drag'} keyboardShouldPersistTaps={'handled'} contentContainerStyle={style.subContainer}>
               <View style={style.content}>
                 <Image style={style.logo} source={require('../../assets/images/logo.png')}></Image>
-                <CustomText variants='h2' fontFamily={Fonts.Bold}>India's Last minute app</CustomText>
-                <CustomText style={style.text} variants='h5' fontFamily={Fonts.SemiBold}>Log in or sign up</CustomText>
-                <CustomInput inputMode='numeric' placeholder='Enter Mobile Number' left={<CustomText fontFamily={Fonts.SemiBold} variants='h6' style={style.phoneText}> + 91</CustomText>} value={phoneNumber} onChange={(event: any) => setPhoneNumber(event.nativeEvent.text.slice(0, 10)
+                <CustomText variant='h2' fontFamily={Fonts.Bold}>India's Last minute app</CustomText>
+                <CustomText style={style.text} variant='h5' fontFamily={Fonts.SemiBold}>Log in or sign up</CustomText>
+                <CustomInput inputMode='numeric' placeholder='Enter Mobile Number' left={<CustomText fontFamily={Fonts.SemiBold} variant='h6' style={style.phoneText}> + 91</CustomText>} value={phoneNumber} onChange={(event: any) => setPhoneNumber(event.nativeEvent.text.slice(0, 10)
                 )} onClear={() => setPhoneNumber('')} ></CustomInput>
                 <CustomButton title='Continue' onPress={() => {
-                    
-                 }}
-                disable={phoneNumber.length != 10} loadingState={false}></CustomButton>
+
+                }}
+                  disable={phoneNumber.length != 10} loadingState={false}></CustomButton>
               </View>
             </Animated.ScrollView>
           </PanGestureHandler>
@@ -110,7 +127,7 @@ const style = StyleSheet.create({
   },
   phoneText:
   {
-    marginEnd: 10,
+    marginHorizontal: 10,
   },
 })
 

@@ -15,9 +15,9 @@ interface CustomButtonProps {
 
 const CustomButton: FC<CustomButtonProps> = ({ onPress, title, disable, loadingState, style, ...props }) => {
     return (
-        <View style = {styles.contianer}>
+        <View style = {styles.container}>
             <TouchableOpacity disabled={disable} activeOpacity={0.8} onPress={onPress} style={[styles.buttonStyle, { backgroundColor: disable ? Colors.disabled : Colors.secondary }]}>
-                {loadingState ? <ActivityIndicator color={"white"} size={'small'} /> : <CustomText style={styles.text} variants='h6' fontFamily={Fonts.SemiBold}>{title}</CustomText>}
+                {loadingState ? <ActivityIndicator color={"white"} size={'small'} /> : <CustomText style={styles.text} variant='h6' fontFamily={Fonts.SemiBold}>{title}</CustomText>}
             </TouchableOpacity>
         </View>
 
@@ -29,7 +29,7 @@ export default CustomButton
 
 const styles = StyleSheet.create({
 
-    contianer : 
+    container : 
     {
         width : "100%",
     },
@@ -43,11 +43,9 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     
-
     text:
     {
         color: "#ffff",
-
     }
 
 })
