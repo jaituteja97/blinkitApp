@@ -6,15 +6,13 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 interface Props {
-
     variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8" | "h9" | "body";
     fontFamily?: Fonts;
     fontSize?: number;
     style?: TextStyle | TextStyle[];
     children?: React.ReactNode;
     numberOfLine?: number;
-    onLayout?: (event: object) => void
-   
+    onLayout?: (event: object) => void   
 }
 
 
@@ -55,11 +53,10 @@ const CustomText: React.FC<Props> = ({ style, children, numberOfLine, onLayout, 
         case "body":
             computedFontSize = RFValue(fontSize || 12);
             break;
-
     }
 
     return (
-        <Text onLayout={onLayout} numberOfLines={numberOfLine != undefined ? numberOfLine : undefined} style={[style, { fontFamily: fontFamily, fontSize: fontSize,color : Colors.text}]} {...props}>{children}</Text>
+        <Text onLayout={onLayout} numberOfLines={numberOfLine != undefined ? numberOfLine : undefined} style={[{  fontFamily: fontFamily, fontSize: fontSize ?? computedFontSize,color : Colors.text},style]} {...props}>{children}</Text>
     )
 }
 

@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         paddingLeft: 10,
+        paddingRight : 10,
+        
     },
     inputContainer: {
         flex: 1,

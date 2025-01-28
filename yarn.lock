@@ -2120,6 +2120,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@r0b0t3d/react-native-collapsible@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "@r0b0t3d/react-native-collapsible@npm:1.4.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: ">=3.0.0"
+  checksum: 2dc4ab757e855977cbe7c30d4b5e0ba776f0ac34b8afd06b9cc9dab6102cfbd08ba8c4fff2ec946331eeb6bb27d3cac064b7e23a4c1d63adc4690f49227e85b5
+  languageName: node
+  linkType: hard
+
 "@react-native-async-storage/async-storage@npm:^2.0.0":
   version: 2.0.0
   resolution: "@react-native-async-storage/async-storage@npm:2.0.0"
@@ -4134,6 +4146,7 @@ __metadata:
     "@babel/preset-env": ^7.25.3
     "@babel/runtime": ^7.25.0
     "@homielab/react-native-auto-scroll": ^0.0.10
+    "@r0b0t3d/react-native-collapsible": ^1.4.3
     "@react-native-async-storage/async-storage": ^2.0.0
     "@react-native-community/cli": 15.0.0-alpha.2
     "@react-native-community/cli-platform-android": 15.0.0-alpha.2

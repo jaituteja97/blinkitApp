@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Keyboard, Alert } from 'react-native'
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { GestureHandlerRootView, PanGestureHandler, State } from 'react-native-gesture-handler'
 import CustomSafeAreaView from '../../components/global/CustomSafeAreaView'
@@ -7,15 +7,24 @@ import { imageData } from '../../utils/dummyData'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { resetAndNavigate } from '../../utils/NavigationUtils'
 import CustomText from '../../components/ui/CustomText'
-import { Fonts } from '../../utils/Constants'
+import { Colors, Fonts, lightColors } from '../../utils/Constants'
 import CustomInput from '../../components/ui/CustomInput'
 import CustomButton from '../../components/ui/CustomButton'
 import useKeyboardOffsetHeight from '../../utils/keyboardoffsetHeight'
+import { RFValue } from 'react-native-responsive-fontsize'
+import LinearGradient from 'react-native-linear-gradient'
+import { customerLogin } from '../../service/authService'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store' 
+
+
+const bottomColors = [...lightColors].reverse()
 
 const CustomerLogin: FC = () => {
-
+  const dispatch = useDispatch<AppDispatch>();
   const [gestureSequence, setGestureSequence] = useState<string[]>([]);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [loading, setLoading] = useState(false);
   const keyboardOffsetHeight = useKeyboardOffsetHeight();
   const animatedValue = useSharedValue(0);
 
@@ -43,20 +52,25 @@ const CustomerLogin: FC = () => {
         direction = translationY > 0 ? 'Down' : 'Up';
       }
 
-      console.log(direction);
       let newSequence = [...gestureSequence, direction].slice(-4)
       setGestureSequence(newSequence);
-      console.log(newSequence);
       if (newSequence.join(' ') == "Right Left Up Down") {
         resetAndNavigate('DeliveryLogin')
       }
-
     }
   };
-
   const handleAuth = async () => {
-
-  }
+    Keyboard.dismiss();
+    setLoading(true);
+    try {
+      await dispatch(customerLogin(phoneNumber)); 
+    
+    } catch (e) {
+      Alert.alert("Login Failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -66,22 +80,27 @@ const CustomerLogin: FC = () => {
           <ProductSlider></ProductSlider>
           <PanGestureHandler onHandlerStateChange={handleGesture}>
             <Animated.ScrollView style={{transform : [{translateY : animatedValue}]}} bounces={false} keyboardDismissMode={'on-drag'} keyboardShouldPersistTaps={'handled'} contentContainerStyle={style.subContainer}>
+              <LinearGradient 
+               colors={bottomColors} style = {style.gradiant} />
               <View style={style.content}>
                 <Image style={style.logo} source={require('../../assets/images/logo.png')}></Image>
                 <CustomText variant='h2' fontFamily={Fonts.Bold}>India's Last minute app</CustomText>
                 <CustomText style={style.text} variant='h5' fontFamily={Fonts.SemiBold}>Log in or sign up</CustomText>
                 <CustomInput inputMode='numeric' placeholder='Enter Mobile Number' left={<CustomText fontFamily={Fonts.SemiBold} variant='h6' style={style.phoneText}> + 91</CustomText>} value={phoneNumber} onChange={(event: any) => setPhoneNumber(event.nativeEvent.text.slice(0, 10)
                 )} onClear={() => setPhoneNumber('')} ></CustomInput>
-                <CustomButton title='Continue' onPress={() => {
-
-                }}
+                <CustomButton title='Continue' onPress={handleAuth}
                   disable={phoneNumber.length != 10} loadingState={false}></CustomButton>
               </View>
+      
             </Animated.ScrollView>
           </PanGestureHandler>
         </CustomSafeAreaView>
-      </View>
 
+      </View>
+      <View style = {style.fotter}>
+      <CustomText style={style.fotterText} fontSize={RFValue(6)}>By Continuing, you agree to our Terms of Services & Privacy Policy</CustomText>  
+      </View>
+              
     </GestureHandlerRootView>
   )
 }
@@ -103,6 +122,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    marginBottom : 20,
   },
   animatedContainer: {
     flex: 1,
@@ -129,6 +149,31 @@ const style = StyleSheet.create({
   {
     marginHorizontal: 10,
   },
+  fotter : 
+  {
+     borderTopWidth : 0.8,
+      fontFamily : Fonts.Regular, 
+      borderColor : Colors.border,
+      paddingBottom : 10,
+      position : 'absolute',
+      zIndex : 2,
+      bottom : 0,
+      width : '100%',
+      justifyContent : "center",
+      alignItems : "center",
+      padding : 10,
+      backgroundColor : "#f8f9fc"
+        
+  },
+  fotterText: 
+  {
+      marginBottom : 10,
+  },
+  gradiant: 
+  {
+    paddingTop : 60,
+    width : "100%",
+  }
 })
 
 
